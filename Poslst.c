@@ -35,7 +35,7 @@ printf("invalid position");
 }
 else{
 temp=head;
-while(i<pos){
+while(i<pos-1){
 temp=temp->next;
 i++;
 }
