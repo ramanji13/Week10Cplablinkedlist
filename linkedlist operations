@@ -1,0 +1,151 @@
+#include<stdio.h>
+#include<stdlib.h>
+ struct node{
+  int data;
+  struct node *next;
+ };
+   struct node *head=NULL;
+   struct node *temp;
+   struct node *newnode;
+   int count=0,position;
+      void create(){
+        char ch;      
+          do{
+            newnode=(struct node*)malloc(sizeof(struct node));
+              printf("enter the data of the node\n");
+              scanf("%d",&newnode->data);
+              newnode->next=NULL;
+               if(head==NULL){
+                 head=temp=newnode;
+                 count++;
+               }else{
+                 temp->next=newnode;
+                 temp=newnode;
+                 count++;               
+              } 
+          printf("do you want to enter more(Y/N)\t");
+          scanf(" %c",&ch);
+         }while(ch=='y'||ch=='Y');   
+         
+      }
+  
+  
+      void display(){
+        temp=head;
+        while(temp->next!=NULL){
+          printf("%d->",temp->data);
+          temp=temp->next;
+        }printf("NULL\n");
+      }
+      
+      
+      void insert_at_first(){
+         newnode=(struct node*)malloc(sizeof(struct node));
+         printf("enter the data for adding at first\t");
+         scanf("%d",&newnode->data);
+         newnode->next=head;
+         head=newnode;
+         count++;       
+      }
+      
+     
+      void insert_at_end(){
+       newnode=(struct node*)malloc(sizeof(struct node));
+       printf("enter the data to add an element at end\t");
+       scanf("%d",&newnode->data);
+       newnode->next=NULL;
+       temp=head;
+          while(temp->next!=NULL){
+            temp=temp->next;
+          }temp->next=newnode;
+          count++;
+      }
+       
+      void insert_at_position(){
+      printf("enter the position that you want to add\t");
+      scanf("%d",&position);
+        if(position>count+1||position<=0){
+           printf("invalid position! we cannot add an element\t");
+           return;
+        }else if(position==count+1){
+          insert_at_end();
+          return;
+        }else if(position==1){
+         insert_at_first();
+         return;
+        }else{
+          temp=head;
+          for(int i=1;i<(position-1);i++){
+           temp=temp->next;  
+          }
+           newnode=(struct node*)malloc(sizeof(struct node));
+           printf("enter the node data to add at position%d\t",position);
+           scanf("%d",&newnode->data);
+           newnode->next=temp->next;
+           temp->next=newnode;
+           count++;
+          }  
+      }
+      
+      void delete_at_first(){
+        temp=head;
+        head=head->next;
+        printf("list after deletion of element %d at first\n",temp->data);
+        count--; 
+        free(temp);      
+      }
+      
+      void delete_at_end(){
+        temp=head;
+        while(temp->next->next!=NULL){
+          temp=temp->next;
+        }printf("list after deletion of element %d at end\n",temp->data);
+        count--;
+        free(temp->next);
+         temp->next=NULL;
+      }
+      
+      void delete_at_position(){
+       printf("enter the position to delete\t");
+       scanf("%d",&position);
+        if(position>count+1||position<=0){
+           printf("invalid position! we cannot delete an element\n");
+           return;
+        }else if(position==1){
+           delete_at_first();
+           return;
+        }else if(position==count){
+         delete_at_end();
+         return;
+        }else{
+          struct node *fast;
+          temp=head;
+          fast=temp->next;
+          for(int i=0;i<(position-1);i++){
+                temp=temp->next;
+                fast=fast->next;
+          }printf("list after deletion of element %d at position%d\n",temp->data,position);
+          temp->next=fast->next;
+          count--;
+          free(fast);  
+        }
+      }
+      
+      
+ int main(){
+   create();
+   display();
+   insert_at_first();
+   display();
+   insert_at_position();
+   display();
+   insert_at_end();
+   display();
+   delete_at_first();
+   display();
+   delete_at_position();
+   display();
+   delete_at_end();
+   display();
+   return 0;
+ }     
