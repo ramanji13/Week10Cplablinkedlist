@@ -97,7 +97,7 @@
       
       void delete_at_end(){
         temp=head;
-        while(temp->next->next!=NULL){
+        while(temp->next!=NULL&&temp->next->next!=NULL){
           temp=temp->next;
         }printf("list after deletion of element %d at end\n",temp->data);
         count--;
