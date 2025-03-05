@@ -46,6 +46,7 @@ int count=0;
    else{ 
     newnode->next=head;
     newnode->prev=head->prev;
+    head->prev->next=newnode;
      head->prev=newnode;
     head=newnode;
     count++;
@@ -101,6 +102,10 @@ int count=0;
  }
  void display(){
   N *temp=head;
+  if(head==NULL){
+   printf("NOTHING TO DELETE");
+   return;
+  }
    do{
    printf("%d->",temp->data);
    temp=temp->next;
@@ -173,23 +178,23 @@ int count=0;
  int main(){
    create();
    display();
-   printf("\nsize is : %d\n",count);
+   printf("\n size is : %d\n",count);
   insert_at_begin();
    display();
-    printf("\nsize is : %d\n",count);
+    printf("\n size is : %d\n",count);
   insert_at_end();
    display();
-    printf("\nsize is : %d\n",count);
+    printf("\n size is : %d\n",count);
   insert_at_pos();
   display();
-   printf("\nsize is : %d\n",count);
+   printf("\n size is : %d\n",count);
   delete_at_begin();
   display();
-   printf("\nsize is : %d\n",count);
+   printf("\n size is : %d\n",count);
   delete_at_end();
   display();
-   printf("\nsize is : %d\n",count);
+   printf("\n size is : %d\n",count);
   delete_at_pos();
   display();
-   printf("\nsize is : %d\n",count);
+   printf("\n size is : %d\n",count);
  }
